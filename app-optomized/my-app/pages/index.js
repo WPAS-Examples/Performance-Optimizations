@@ -4,11 +4,10 @@ import Head from 'next/head';
 import { useState, useEffect } from 'react';
 import useSWR from 'swr';
 import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
-import styles from '../styles/Home.module.css'
+import styles from '@/styles/Home.module.css'
 
-const StarRating = dynamic(() => import('../components/StarRating'), {
-  suspense: true
+const StarRating = dynamic(() => import('@/components/StarRating'), {
+  loading: () => <>Loading...</>
 });
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -70,7 +69,7 @@ export default function Home() {
                 <Accordion.Item key={movie.id} eventKey={movie.id}>
                   <Accordion.Header><strong>{movie.title}</strong>&nbsp;- {movie.genre}</Accordion.Header>
                   <Accordion.Body>
-                  <strong>Rating:</strong> {accordionOpened && <Suspense fallback={`Loading...`}><StarRating rating={movie.rating} /></Suspense>}<br /><br />
+                  <strong>Rating:</strong> {accordionOpened && <StarRating rating={movie.rating} />}<br /><br />
                     <strong>Plot Summary</strong><br />{movie.plot_summary}
                   </Accordion.Body>
                 </Accordion.Item>

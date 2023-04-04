@@ -3,12 +3,11 @@ import Image from 'next/image';
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
-import getMovieData from '../lib/movieData';
-import { Suspense } from 'react';
-import styles from '../styles/Home.module.css'
+import getMovieData from '@/lib/movieData';
+import styles from '@/styles/Home.module.css'
 
-const StarRating = dynamic(() => import('../components/StarRating'), {
-  suspense: true
+const StarRating = dynamic(() => import('@/components/StarRating'), {
+  loading: () => <>Loading...</>
 });
 
 // This function gets called at build time
@@ -71,7 +70,7 @@ export default function Home({staticMovies}) {
                 <Accordion.Item key={movie.id} eventKey={movie.id}>
                   <Accordion.Header><strong>{movie.title}</strong>&nbsp;- {movie.genre}</Accordion.Header>
                   <Accordion.Body>
-                  <strong>Rating:</strong> {accordionOpened && <Suspense fallback={`Loading...`}><StarRating rating={movie.rating} /></Suspense>}<br /><br />
+                  <strong>Rating:</strong> {accordionOpened && <StarRating rating={movie.rating} />}<br /><br />
                     <strong>Plot Summary</strong><br />{movie.plot_summary}
                   </Accordion.Body>
                 </Accordion.Item>

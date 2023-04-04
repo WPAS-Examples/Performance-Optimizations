@@ -1,5 +1,5 @@
 
-import getMovieData from "../../lib/movieData";
+import getMovieData from "@/lib/movieData";
 
 export default function handler(req, res) {
   const { method } = req; switch (method) {

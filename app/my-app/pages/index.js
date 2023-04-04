@@ -1,11 +1,11 @@
 import { Container, Row, Col, Card, Accordion } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
-import StarRating from '../components/StarRating';
+import StarRating from '@/components/StarRating';
 import useSWR from 'swr';
 import _ from 'lodash';
 
-import styles from '../styles/Home.module.css'
+import styles from '@/styles/Home.module.css'
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
